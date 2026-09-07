@@ -115,12 +115,17 @@ if (!existsSync(MODELS_CACHE)) {
     const text = readFileSync(file, "utf8");
     const re = /(    openai-codex:\n      apiKeyEnv: CODEX_CHATGPT_TOKEN\n)(?:      models:\n(?:        .*\n)+)?/;
     if (!re.test(text)) { console.log("skip (не знайшов блок openai-codex):", file); continue; }
-    // об'єднання: спочатку кеш (порядок сервера), потім наявні, яких у кеші нема
-    const merged = new Map();
+    // об'єднання: наявний порядок у settings зберігається (поля оновлюються
+    // з кеша), нові моделі з кеша додаються в кінець у порядку сервера
+    const cacheMap = new Map();
     for (const m of fromCache) {
-      merged.set(m.slug, { name: prettyName(m.display_name), contextWindow: m.context_window });
+      cacheMap.set(m.slug, { name: prettyName(m.display_name), contextWindow: m.context_window });
     }
+    const merged = new Map();
     for (const [slug, m] of parseExistingModels(text)) {
+      merged.set(slug, cacheMap.get(slug) ?? m);
+    }
+    for (const [slug, m] of cacheMap) {
       if (!merged.has(slug)) merged.set(slug, m);
     }
     const block = ["      models:"];

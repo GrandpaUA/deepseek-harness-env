@@ -7,3 +7,10 @@
     - id: locale-uk
       name: '@local/dsh-locale-uk'
 
+# Вимикаємо вбудований плагін DeepSeek/DashScope: він реєструє роути
+# "DeepSeek" і "DashScope (Qwen)", які не видаляються через GUI. Ми ними
+# не користуємось (Qwen йде через llm-pi-ai qwen-token-plan).
+# Щоб повернути — прибрати цей запис і рестартнути інстанс.
+- id: llm-deepseek
+  disabled: true
+
