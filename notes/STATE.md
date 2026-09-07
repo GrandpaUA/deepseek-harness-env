@@ -34,6 +34,8 @@
 - dump-config зі стороннього шела: обов'язково виставити `DSH_HOME`, інакше дампиться дефолтний профіль без наших рядків
 
 ## Нюанси
+- settings.yaml хот-релоадиться (dsh-base patch.yml: «settings.yaml, hot-reloaded») — зміни моделей/провайдерів без рестарту
+- 2026-09-07: 404 resource_not_found на kimi-coding/k3-256k — план Andante дає лише `kimi-for-coding` (Moderato+ для k3). Додано `kimi-for-coding` (K2.7 Code, 262144 ctx) у settings.yaml обох інстансів
 - grep/glob інструменти зламані → пошук через pwsh `Select-String`
 - web_search без API-ключа → пошук через Invoke-RestMethod (GitHub API, npm registry)
 - /compact не викликається агентом; стиснення = авто-чекпоінти харнесу + цей файл
