@@ -35,7 +35,7 @@
 
 ## Нюанси
 - settings.yaml хот-релоадиться (dsh-base patch.yml: «settings.yaml, hot-reloaded») — зміни моделей/провайдерів без рестарту
-- 2026-09-07: 404 resource_not_found на kimi-coding/k3-256k — план Andante дає лише `kimi-for-coding` (Moderato+ для k3). Додано `kimi-for-coding` (K2.7 Code, 262144 ctx) у settings.yaml обох інстансів
+- 2026-09-07: 404 resource_not_found на kimi-coding/k3-256k. План юзера — **Allegretto** → доступні всі 4 моделі (k3 1M ctx, k3-256k, kimi-for-coding, kimi-for-coding-highspeed). Додано kimi-for-coding + highspeed у settings.yaml обох інстансів; якщо k3 все одно 404 — проблема в ключі (не та консоль / не активний), а не в плані
 - grep/glob інструменти зламані → пошук через pwsh `Select-String`
 - web_search без API-ключа → пошук через Invoke-RestMethod (GitHub API, npm registry)
 - /compact не викликається агентом; стиснення = авто-чекпоінти харнесу + цей файл
