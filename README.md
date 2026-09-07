@@ -59,7 +59,7 @@ plugins/            — НЕ в репо: тут лише junction-и на ок�
 - Власний `DSH_HOME` (профіль `web`, settings.yaml), **спільний runtime** з продом (launcер `dsh-web-dev.cmd` виставляє `DSH_HOME` і викликає продовий `bin.js`).
 - `profiles/node_modules` — junction на продовий шар junction-ів у `runtime/node_modules`; `plugins/dsh-locale-uk` — junction на репо перекладу. Правки плагіна видно в обох інстансах одразу.
 - Свої `sessions/`, `storages/` — падає і рестартиться без жодного ризику для прода.
-- Стоп/старт: kill за портом 3081 + запуск `dsh-web-dev.cmd` (через WMI, як safe-restart, якщо з сесії).
+- Стоп/старт: `scripts\dev-restart.ps1` (з сесії — через WMI, як safe-restart); лог `<DSH-Dev>\last-dev-restart.log`. Бойовий тест 2026-09-07: SUCCESS, прод не зачеплено.
 - ⚠️ `.credentials.yaml` не копіюється скриптами — якщо dev просить ключі, скопіювати файл з DSH_HOME вручну.
 
 Цикл розробки: правка → рестарт **dev** (3081) → тест → commit → `safe-restart` прода як промоція перевіреного.
