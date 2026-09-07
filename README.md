@@ -52,6 +52,14 @@ plugins/            — НЕ в репо: тут лише junction-и на ок�
 
 ⚠️ `safe-restart` вимагає чистий git — комітимо зміни перед перемиканням.
 
+## LLM-провайдери
+
+- **qwen-token-plan** — API-ключ, працює з коробки.
+- **kimi-coding** — Kimi Code підписка; у settings.yaml лише `apiKeyEnv` (ендпоінт/моделі/UA — з каталогу pi-ai).
+- **openai-codex** — ChatGPT Plus ($20): DSH OAuth-логіну немає, тому токен береться з Codex CLI (`codex login` → `~/.codex/auth.json`).
+  - `scripts\sync-codex-token.mjs` — копіює свіжий access_token в `.credentials.yaml` обох інстансів; якщо лишилось <2 днів — рефрешить (refresh-токен ротується, нова пара пишеться назад в auth.json).
+  - Планувальник Windows: таск **«DSH Codex Token Sync»**, щодня 09:47 — реєструється `scripts\register-codex-sync.ps1`. Лог: `notes/codex-token-sync.log`. Токен живе ~10 днів; якщо DSH раптом відповідає 401 на gpt-* — прогнати синк вручну.
+
 ## Dev-інстанс (полігон для розробки)
 
 Окремий інстанс DSH для експериментів: `C:\All\Project\Vibecode\DSH-Dev` → http://127.0.0.1:3081.
