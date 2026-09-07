@@ -36,6 +36,7 @@
 ## Нюанси
 - settings.yaml хот-релоадиться (dsh-base patch.yml: «settings.yaml, hot-reloaded») — зміни моделей/провайдерів без рестарту
 - 2026-09-07: 404 resource_not_found на kimi-coding — ВИРІШЕНО. kimi-coding є каталожним провайдером pi-ai (anthropic-messages, baseUrl https://api.kimi.com/coding, UA KimiCLI/1.5 — усе з каталогу). Наш baseURL з /v1 дублював шлях → /coding/v1/v1/messages → 404. Фікс: у settings.yaml лишено ТІЛЬКИ apiKeyEnv, без baseURL/models. Перевірено прямим POST /v1/messages → 200
+- 2026-09-07: **GPT-6 Astra** додано в openai-codex (id `gpt-6-astra`, з ~/.codex/models_cache.json, ctx 272000/max 128000; pi-ai каталог її ще не знає — протокол успадковується від каталожних сусідів openai-codex-responses). У models роута виписані всі 7 каталожних + астра (список models ЗАМІЩУЄ каталог, тому треба перелічувати все)
 - 2026-09-07: ChatGPT Plus ($20) в DSH через openai-codex: OAuth-токен з Codex CLI (`~/.codex/auth.json`, логін уже є) → кредешел CODEX_CHATGPT_TOKEN. `scripts/sync-codex-token.mjs` — синк + авто-рефреш (access_token живе ~10 днів; DSH сам НЕ рефрешить); **повішено на планувальник Windows: таск «DSH Codex Token Sync», щодня 09:47**, реєстратор `scripts/register-codex-sync.ps1`, лог `notes/codex-token-sync.log`. settings: блок openai-codex скорочено до apiKeyEnv — каталог pi-ai дає всі 7 моделей (gpt-5.3-codex-spark…gpt-5.6-terra)
 - grep/glob інструменти зламані → пошук через pwsh `Select-String`
 - web_search без API-ключа → пошук через Invoke-RestMethod (GitHub API, npm registry)
