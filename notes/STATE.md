@@ -34,6 +34,8 @@
 - dump-config зі стороннього шела: обов'язково виставити `DSH_HOME`, інакше дампиться дефолтний профіль без наших рядків
 
 ## Нюанси
+- 2026-09-07: **HMR ≠ рестарт для cordis.patch.yml**: HMR підхоплює patch наживо (GUI одразу показує ефект), але лишає напів-remountнутий стан → ходи падають з "Cannot read properties of undefined (reading 'prepare')". Після правок cordis.patch.yml — обов'язково повний safe-restart
+- 2026-09-07: у корені репо з'явився чужий AGENTS.md (від проєкту YouTube Voice Translator / subtitres) — блокував safe-restart (git не чистий). Перенесено в %TEMP%\AGENTS-from-dsh-repo-backup.md; у репо DSH свого AGENTS.md нема і не треба
 - settings.yaml хот-релоадиться (dsh-base patch.yml: «settings.yaml, hot-reloaded») — зміни моделей/провайдерів без рестарту
 - 2026-09-07: 404 resource_not_found на kimi-coding — ВИРІШЕНО. kimi-coding є каталожним провайдером pi-ai (anthropic-messages, baseUrl https://api.kimi.com/coding, UA KimiCLI/1.5 — усе з каталогу). Наш baseURL з /v1 дублював шлях → /coding/v1/v1/messages → 404. Фікс: у settings.yaml лишено ТІЛЬКИ apiKeyEnv, без baseURL/models. Перевірено прямим POST /v1/messages → 200
 - 2026-09-07: **GPT-6 Astra** додано в openai-codex (id `gpt-6-astra`, з ~/.codex/models_cache.json, ctx 272000; pi-ai каталог її ще не знає — протокол успадковується від каталожних сусідів openai-codex-responses). У models роута виписані всі моделі (список models ЗАМІЩУЄ каталог, тому треба перелічувати все)
