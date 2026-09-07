@@ -52,6 +52,18 @@ plugins/            — НЕ в репо: тут лише junction-и на ок�
 
 ⚠️ `safe-restart` вимагає чистий git — комітимо зміни перед перемиканням.
 
+## Dev-інстанс (полігон для розробки)
+
+Окремий інстанс DSH для експериментів: `C:\All\Project\Vibecode\DSH-Dev` → http://127.0.0.1:3081.
+
+- Власний `DSH_HOME` (профіль `web`, settings.yaml), **спільний runtime** з продом (launcер `dsh-web-dev.cmd` виставляє `DSH_HOME` і викликає продовий `bin.js`).
+- `profiles/node_modules` — junction на продовий шар junction-ів у `runtime/node_modules`; `plugins/dsh-locale-uk` — junction на репо перекладу. Правки плагіна видно в обох інстансах одразу.
+- Свої `sessions/`, `storages/` — падає і рестартиться без жодного ризику для прода.
+- Стоп/старт: kill за портом 3081 + запуск `dsh-web-dev.cmd` (через WMI, як safe-restart, якщо з сесії).
+- ⚠️ `.credentials.yaml` не копіюється скриптами — якщо dev просить ключі, скопіювати файл з DSH_HOME вручну.
+
+Цикл розробки: правка → рестарт **dev** (3081) → тест → commit → `safe-restart` прода як промоція перевіреного.
+
 ## Матеріали для розробки (`notes/`)
 
 - `STATE.md` — поточний стан робіт (якір після стиснень контексту).

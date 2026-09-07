@@ -16,7 +16,11 @@
 - dshmarket, dsh-thinking-language, dsh-session-fork, dsh-recall, @dennisrongo/dsh-memory, github:Buyi-wsgzg/dsh-sidechain, dsh-checkpoint-rewind + dsh-checkpoint-diff, deepseek-harness-ultra-slash (/steer /new /skill /docs)
 
 ## Черга завдань
-- [ ] Dev-інстанс DSH-Dev (порт 3081, окремий DSH_HOME, спільний runtime) — узгоджено, чекає реалізації
+- [x] Dev-інстанс DSH-Dev — ГОТОВО (2026-09-07): `C:\All\Project\Vibecode\DSH-Dev`, порт 3081, HTTP 200, свої sessions/storages
+  - власний DSH_HOME, спільний runtime через `dsh-web-dev.cmd` (форсує DSH_HOME, --port 3081)
+  - `profiles/node_modules` — junction на продовий junction-шар; `plugins/dsh-locale-uk` — junction на репо перекладу
+  - `.credentials.yaml` НЕ копійовано (секрети) — якщо dev просить ключі, скопіювати вручну з DSH_HOME
+- [ ] Мігрувати робочу сесію розробки в dev-інстанс; prod лишається стабільним
 
 ## Безпечний дев-цикл (проти дропу сесії) — ГОТОВО, бойовий тест SUCCESS
 - Зміни конфігів/плагінів НЕ впливають на запущений сервер (композиція фіксується на boot)
