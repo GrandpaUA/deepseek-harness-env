@@ -1,0 +1,20 @@
+# DSH runtime, server-side deps, pnpm-managed installs (restore via installer / pnpm)
+runtime/
+profiles/node_modules/
+profiles/web/node_modules/
+profiles/web/.dsh-market/
+ultra-slash/
+
+# Plugins live in their own repos; plugins/ here is only junctions to them
+plugins/
+
+# Personal state, credentials, machine-specific settings
+sessions/
+storages/
+.credentials.yaml
+settings.yaml
+
+# Junk
+*.log
+.DS_Store
+Thumbs.db
