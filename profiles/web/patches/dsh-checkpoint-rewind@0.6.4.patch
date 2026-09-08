@@ -1,0 +1,18 @@
+diff --git a/lib/projection.mjs b/lib/projection.mjs
+index 619010d9c5e9dcdd147c128180fc20c7689f062b..1189198f703e8f459963b12d81ca884ba9ad59d0 100644
+--- a/lib/projection.mjs
++++ b/lib/projection.mjs	
+@@ -128,9 +128,13 @@ function view(state) {
+ export const checkpointsProjectionDefinition = {
+   key: 'checkpoints',
+   stateSchema,
++  // 兼容 rc.6+ 宿主契约：registry 走 def.schema.parse(def.view(state))，
++  // 缺顶层 schema/view 会让 session.history 整体抛 TypeError。
++  schema: checkpointsWireSchemaList,
+   stateVersion: 0,
+   init,
+   apply,
++  view,
+   wire: {
+     viewSchema: checkpointsWireSchemaList,
+     view,

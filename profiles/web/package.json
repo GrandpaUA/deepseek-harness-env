@@ -13,14 +13,6 @@
     "dsh-thinking-language": "github:qingmomo233/dsh-thinking-language",
     "dshmarket": "^1.41.0"
   },
-  "pnpm": {
-    "overrides": {
-      "@deepseek-ai/dsh-tools": "link:../../runtime/node_modules/@deepseek-ai/dsh-tools",
-      "@deepseek-ai/dsh-settings": "link:../../runtime/node_modules/@deepseek-ai/dsh-settings",
-      "@deepseek-ai/schemastery": "link:../../runtime/node_modules/@deepseek-ai/schemastery",
-      "@deepseek-ai/cosmokit": "link:../../runtime/node_modules/@deepseek-ai/cosmokit"
-    }
-  },
   "dsh": {
     "profile": {
       "bundles": [
