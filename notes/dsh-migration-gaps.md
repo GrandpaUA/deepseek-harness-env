@@ -67,8 +67,8 @@
 - [x] `dock-files` — uk словник + detectLocale(uk), dev bundle ✓
 - [x] `dock-editor` — uk словник + detectLocale(uk), dev bundle ✓
 - [x] `@linxin666/dsh-usage` — uk клієнтський словник + dictionary(uk), dev bundle ✓; pet-бульбашки сервера ще окремо
-- [ ] `dock-git` — великий словник (~147 рядків)
-- [ ] `dsh-classic-coding` — hardcoded lib bundle (~188 рядків), найбрудніше
+- [x] `dock-git` — uk словник для Git graph/menus/dialogs/commit/settings + detectLocale(uk), dev bundle ✓
+- [x] `dsh-classic-coding` — видимі hardcoded UI/status/tooltip рядки українською/Classic Coding, dev bundle ✓; китайські коментарі в коді не чіпались
 
 ### Трек C — кастомна розробка (якщо B не закриє)
 - [ ] Власний плагін за конвенцією: окремий репо в `..\repos\` + junction у `plugins/`
