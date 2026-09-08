@@ -38,6 +38,11 @@
 - **Трек A ЗАКРИТО**: скіли `skills/hands-protocol` (порт протоколу жор з hands_strategy.md під DSH-тули: subagent/workflow/ralph/bg-jobs) і `skills/work-conventions` (5 принципів + конвенції коду + стиль спілкування). Hot-reload спрацював — обидва в каталозі скілів без рестарту
 - Візуальне порівняння редакторів (делеговано qwen3.8-max через workflow — ключ qwen ЖИВИЙ): `notes/editor-comparison/index.html` — 8 реальних скріншотів з GitHub README, темна сторінка укр. Верифіковано головою (magic bytes + перегляд). У dock і better-sidebar-N23 скріншотів у README нема (чесно зазначено)
 - Далі: Трек B (вибір редактора за сторінкою → установка на dev 3081) — чекає рішення користувача
+- Трек B підготовка (08.09): пре-рев'ю сирців трьома жорами → `notes/editor-comparison/source-review.md`.
+  Вердикти: dsh-classic-coding SAFE WITH NOTES (writeFile поза sandbox, Monaco з CDN без SRI),
+  dsh-terminal SAFE WITH NOTES (shell з правами хоста за задумом; node-pty має win32-x64 prebuilds,
+  треба allowBuilds). dock-сімейство — рев'ю триває. Обидва вердикти головою спот-перевірено.
+- Ранбук установки: `notes/track-b-runbook.md` (команди dev→прод, allowBuilds, відкат)
 
 ## Нюанси
 - 2026-09-07/08: **БАГ "prepare" — ЗАКРИТИЙ (RCA доведено)**. Симптом: кожен tool call вбиває хід ("Cannot read properties of undefined (reading 'prepare')" = `ctx.tools[TOOL_RUNTIME_SCHEDULER]` undefined). Причина: **dual-URL module identity** — pnpm тягнув `@deepseek-ai/*` (dsh-tools тощо) як deps плагінів у `profiles/web/node_modules` → Node ESM вантажив ДРУГИЙ інстанс модуля за іншим URL → символи-ключі сервісів (`Symbol("@deepseek-ai/dsh-tools.scheduler")`) роз'їжджались між хостом і бандлами. **Фікс**: видалено всі `@deepseek-ai/*` з `profiles/web/node_modules` обох home; у `profiles/web/.pnpmfile.cjs` (обидва home) хук readPackage зрізає `@deepseek-ai/*` з deps/optionalDeps/peerDeps плагінів — шар НЕ відтворюється при `pnpm install`. **ПРАВИЛО: ніколи не матеріалізувати `@deepseek-ai/*` під `profiles/*/node_modules`** — сторожить .pnpmfile.cjs. Junction-шар `profiles/node_modules/@deepseek-ai/*` → runtime (створюється dsh при бооті, `healProfilesModuleFallback`) — не шкодить, headless-тести зелені з ним
