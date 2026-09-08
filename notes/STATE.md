@@ -37,7 +37,14 @@
 - Аналіз прогалин: `notes/dsh-migration-gaps.md` (що є/чого бракує/план треків A/B/C)
 - **Трек A ЗАКРИТО**: скіли `skills/hands-protocol` (порт протоколу жор з hands_strategy.md під DSH-тули: subagent/workflow/ralph/bg-jobs) і `skills/work-conventions` (5 принципів + конвенції коду + стиль спілкування). Hot-reload спрацював — обидва в каталозі скілів без рестарту
 - Візуальне порівняння редакторів (делеговано qwen3.8-max через workflow — ключ qwen ЖИВИЙ): `notes/editor-comparison/index.html` — 8 реальних скріншотів з GitHub README, темна сторінка укр. Верифіковано головою (magic bytes + перегляд). У dock і better-sidebar-N23 скріншотів у README нема (чесно зазначено)
-- Далі: Трек B (вибір редактора за сторінкою → установка на dev 3081) — чекає рішення користувача
+- **08.09: ПРОМОЦІЯ В ПРОД — усі 6 плагінів у прод-профілі** (коміт 4d7c603): dsh-terminal
+  + dock-base/dock-files/dock-editor/dock-git + dsh-classic-coding, allowBuilds node-pty@1.1.0.
+  UX-тест користувача на dev пройдено (термінал, дерево файлів, git-граф — працюють).
+  Вердикт по редакторах: лишаємо ОБИДВА (dock ліворуч у барі, classic-coding плаваючий
+  праворуч), остаточний вибір пізніше за живим використанням. Канарка PASS, safe-restart
+  через WMI. node-pty win32-x64 prebuilds на місці
+- Далі: живий UX-тест у проді (F5 після рестарту); за бажанням — дрібний комфорт
+  (dsh-edit-diff, dsh-balance, dsh-file-mentions) за тим самим циклом
 - Трек B підготовка (08.09): пре-рев'ю сирців трьома жорами → `notes/editor-comparison/source-review.md`.
   Вердикти: dsh-classic-coding SAFE WITH NOTES (writeFile поза sandbox, Monaco з CDN без SRI),
   dsh-terminal SAFE WITH NOTES (shell з правами хоста за задумом; node-pty має win32-x64 prebuilds,
