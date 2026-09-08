@@ -7,7 +7,7 @@ settings:
 pnpmfileChecksum: sha256-bIUIZa4r98iuDgNd+0u6VBNpfHG4JVRj+fp9HaplflU=
 
 patchedDependencies:
-  dsh-checkpoint-rewind@0.6.4: b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9
+  dsh-checkpoint-rewind@0.6.7: b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9
 
 importers:
 
@@ -29,8 +29,8 @@ importers:
         specifier: ^0.5.2
         version: 0.5.2
       dsh-checkpoint-rewind:
-        specifier: ^0.6.4
-        version: 0.6.4(patch_hash=b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9)
+        specifier: ^0.6.7
+        version: 0.6.7(patch_hash=b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9)
       dsh-recall:
         specifier: ^0.3.0
         version: 0.3.0
@@ -43,6 +43,8 @@ importers:
       dshmarket:
         specifier: ^1.41.0
         version: 1.41.0
+
+  ../../plugins/dsh-locale-uk: {}
 
 packages:
 
@@ -71,8 +73,8 @@ packages:
     resolution: {integrity: sha512-SzOGRssxTdBITWuRJIEivWNWTJqtKxU4kFg5/xXyd17L5Dc4wuJR4V0TuPyevHSSACbWxIvLMxOkiYkgwDLhZg==}
     engines: {node: ^22.19.0 || >=24.0.0}
 
-  dsh-checkpoint-rewind@0.6.4:
-    resolution: {integrity: sha512-NSZVwzGKzm1nWNoWFSd+Vi337ZqYWMUFidn5yZ4kN9LN8Dyx0XbX7KE2OkpkvT+Kx2+pq3UCEzZAJ3C2pwq+DA==}
+  dsh-checkpoint-rewind@0.6.7:
+    resolution: {integrity: sha512-SrwE6kAa76c8X3QGYe06dPUD8yTyEPjTr/tgIkKUCZ8UWl+7EjoZ249wYQm09+OwAjH2PhF8dvAhPtMwZfv9sg==}
     engines: {node: ^22.19.0 || >=24.0.0}
     peerDependencies:
       '@deepseek-ai/dsh-client-connection': '*'
@@ -163,7 +165,7 @@ snapshots:
     dependencies:
       zod: 4.5.4
 
-  dsh-checkpoint-rewind@0.6.4(patch_hash=b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9):
+  dsh-checkpoint-rewind@0.6.7(patch_hash=b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9):
     dependencies:
       zod: 4.5.4
 

@@ -7,7 +7,7 @@
     "@local/dsh-locale-uk": "workspace:*",
     "deepseek-harness-ultra-slash": "0.2.2",
     "dsh-checkpoint-diff": "^0.5.2",
-    "dsh-checkpoint-rewind": "^0.6.4",
+    "dsh-checkpoint-rewind": "^0.6.7",
     "dsh-recall": "^0.3.0",
     "dsh-session-fork": "^0.2.0",
     "dsh-thinking-language": "github:qingmomo233/dsh-thinking-language",
