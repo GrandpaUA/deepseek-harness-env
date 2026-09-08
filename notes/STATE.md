@@ -54,14 +54,19 @@
   `card.error` — не додавати зловмисні custom_api baseUrl; (N5) при OAuth-логіні Codex пише
   `~/.codex/auth.json` — **логін через плагін НЕ використовувати** (власник файла — наш
   `scripts/sync-codex-token.mjs` + планувальник); плагін сам читає його для квот (autoDetectLocal)
-- **БАГ АПСТРІМА dsh-quota (знайдено на dev, виправлено pnpm patch)**: його `cordis.patch.yml`
-  вставляє рядок `id: ui-quota-monitor, name: 'dsh-quota'` — БЕЗ scope. Зі scoped-пакета
-  голий специфікатор не резолвиться → boot падає `ERR_MODULE_NOT_FOUND` і весь інстанс мертвий.
-  Перекрити `name` власним патч-шаром профілю НЕ виходить (name не мерджиться, лише config) —
-  перевірено на живому буті. Фікс: `pnpm patch` → `patches/@francescoli__dsh-quota@0.2.2.patch`
-  (name → `@francescoli/dsh-quota`) + запис у `patchedDependencies`. **Небезпечно без патча:**
-  на npm існує ЧУЖИЙ пакет `dsh-quota@0.9.0` — голий специфікатор завантажив би його замість нашого.
-  Верифікація dev: рядок у dump-config ✓, `client.js` HTTP 200 (101 KB) ✓, boot entry ✓, dev PID 23104
+- **БАГ АПСТРІМА dsh-quota (знайдено на dev, виправлено pnpm patch)** — ДВОГОЛОВИЙ, обидві
+  половини хардкодять ім'я без scope:
+  (1) `cordis.patch.yml` вставляє `id: ui-quota-monitor, name: 'dsh-quota'` → зі scoped-пакета
+  голий специфікатор не резолвиться → boot падає `ERR_MODULE_NOT_FOUND`, інстанс мертвий.
+  Перекрити `name` власним патч-шаром профілю НЕ виходить (мерджиться лише `config`, не `name`) —
+  перевірено живим бутом;
+  (2) `lib/client.js` реєструє бандл як `__ModuleLoader__.load({ id: "dsh-quota" })` (захардкоджено
+  у `bundle-client.mjs` апстріма) → GUI: "bundle loaded without registering @francescoli/dsh-quota
+  via __ModuleLoader__.load" — плагін не вантажиться в браузері.
+  Фікс ОДНИМ патчем: `patches/@francescoli__dsh-quota@0.2.2.patch` (name → `@francescoli/dsh-quota`
+  в обох файлах) + запис у `patchedDependencies`. **Небезпечно без патча:** на npm існує ЧУЖИЙ
+  пакет `dsh-quota@0.9.0` — голий специфікатор завантажив би його замість нашого.
+  Верифікація dev: рядок у dump-config ✓, серверний бут ✓, `client.js` HTTP 200 з `id: "@francescoli/dsh-quota"` ✓ (dev PID 13204)
 - При промоції квот у прод: скопіювати файл патча в `profiles/web/patches/` + додати запис
   `patchedDependencies` у прод `pnpm-workspace.yaml` (разом з установкою пакета)
 - Далі: живий UX-тест у проді (F5 після рестарту); за бажанням — дрібний комфорт
