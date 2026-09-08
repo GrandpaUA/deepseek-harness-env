@@ -43,12 +43,17 @@
 - Рішення про редактора: див. `notes/editor-comparison/index.html` (зібрав qwen3.8-max 08.09)
 
 ### Трек B — готові плагіни (dev 3081 → тест → прод)
-- [ ] Термінал: `giiiiiithub/terminal` (PTY, xterm.js, cmd.exe, мультитаби)
-- [ ] Редактор: `better-er/dsh-classic-coding` (Monaco + дерево в розмові) — АБО повний
-  workbench `AKS1st/dock`+`dock-editor`+`dock-files`+`dock-git` (важче, але VS Code-подібне)
-- [ ] `a903067276-rgb/dsh-file-mentions` — клікабельні шляхи (щоденний комфорт)
-- [ ] `better-er/dsh-edit-diff` — читабельні дифи в картках edit/write
-- [ ] `GeekRicardo/dsh-balance` — баланси провайдерів (твій облік витрат)
+- Рев'ю сирців: `notes/editor-comparison/source-review.md` — усі кандидати SAFE/SAFE WITH NOTES
+- Візуали: `notes/editor-comparison/index.html`; ранбук: `notes/track-b-runbook.md`
+- [x] `dsh-terminal@0.1.1` на dev 3081 — встановлено, верифіковано непрямо (08.09)
+- [x] `dock-base`+`dock-files`+`dock-editor`+`dock-git` на dev 3081 — встановлено (08.09)
+- [x] `dsh-classic-coding@0.1.1` на dev 3081 — встановлено (08.09), живе порівняння з dock
+- [ ] UX-тест користувачем на dev (термінал + обидва редактори)
+- [ ] Вибір переможця → аутсайдера зняти (`dsh plugin remove`)
+- [ ] Промоція в прод: прод-профіль → канарка (з реальним tool call) → safe-restart
+- [ ] (опційно, не замовлено) `dsh-file-mentions` (git-деп, allowBuilds) — клікабельні шляхи
+- [ ] (опційно, не замовлено) `dsh-edit-diff@0.2.1` — читабельні дифи карток edit/write
+- [ ] (опційно, не замовлено) `dsh-balance@0.2.5` — баланси провайдерів
 
 ### Трек C — кастомна розробка (якщо B не закриє)
 - [ ] Власний плагін за конвенцією: окремий репо в `..\repos\` + junction у `plugins/`
