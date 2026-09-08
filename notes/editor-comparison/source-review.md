@@ -44,7 +44,62 @@
   (`node scripts/prebuild.js || node-gyp rebuild`), README плагіна прямо вимагає
   allowBuilds (цитата з raw README). Коміт-хеш звіту збігається.
 
-## AKS1st/dock-сімейство — рев'ю триває
+## AKS1st/dock-сімейство (4 пакети) — SAFE / SAFE WITH NOTES
+
+Коміти: dock=`24924239`, dock-editor=`a94ddc4a`, dock-files=`fd58e18f`, dock-git=`5b0e2895`.
+СПІЛЬНЕ: нуль runtime-deps, немає postinstall/нативних збірок (allowBuilds НЕ треба),
+без eval/обфускації/телеметрії, trust fence (loopback+trustedHosts+Origin) на всіх
+ендпоінтах, повний i18n zh/en (detectLocale з DSH locale service), MIT.
+
+- **dock-base@0.1.2 — SAFE.** Хост пустий, клієнт — чистий React-shell + localStorage.
+- **dock-editor@0.2.1 — SAFE WITH NOTES.** ⚠️ Це **CodeMirror 6, НЕ Monaco**.
+  N1: `/desk-editor/fs.read` читає БУДЬ-ЯКИЙ абсолютний шлях хоста (навмисна фіча,
+  src/index.ts:116-125) — через довірену сесію читабельний навіть settings.yaml з ключами.
+  Запис обмежений. N2: fallback на process.cwd() при проблемах сесії.
+  Анти-трункація 256KiB на write — добре.
+- **dock-files@0.2.1 — SAFE WITH NOTES.** Path traversal закритий (realpath containment),
+  записи ніколи не перезаповнюють (flag wx), magic-byte check зображень. N3: мутаційні
+  ендпоінти мають fallback на process.cwd() при невалідному sessionId. N4: /wb-files/probe —
+  stat довільного шляху (задокументовано). Видалення рекурсивне без кошика, але з UI-confirm.
+  N5: частина тултіпів захардкоджена zh.
+- **dock-git@0.3.3 — SAFE WITH NOTES, найзріліший.** spawn('git') без shell, env-санітизація,
+  repoRoot обмежений workspace, БЕЗ cwd-fallback (409). Force — лише --force-with-lease;
+  reset --hard/-D — через UI-confirm. Відкидає ext:: remote-helper URL.
+  N6: ⚠️ commit/merge з `--no-verify` (git-ops.ts:325-327) — обходить git-хуки
+  (у нас хуків нема, але знати треба).
+
+**Установка**: `dsh plugin --profile web add dock-base` → `dock-files` → `dock-editor` →
+`dock-git` (порядок формально неважливий; dock-editor вимагає dock+dock-files, dock-git
+незалежний; можна ставити не всі). Усе на npm, allowBuilds не потрібен.
+
+---
+
+## ФІНАЛЬНИЙ СИНТЕЗ (голова, 08.09)
+
+Усі три кандидати чисті від шкідливої поведінки. Спільна ціна — кожен дає веб-UI
+доступ до хоста (shell / довільний read|write) з правами процесу DSH. Це прийнятно
+тільки за полісі **localhost-only, ніколи не експонувати без auth** — наш дефолт.
+
+| | classic-coding | dock-сімейство | terminal |
+|---|---|---|---|
+| Редактор | Monaco (CDN!) | CodeMirror 6 | — |
+| Дерево файлів | базове | повне (мутації) | — |
+| Git UI | — | git-граф+stage+push | — |
+| Термінал | — | — | PTY повний |
+| npm | ✓ | ✓ (4 пакети) | ✓ |
+| allowBuilds | ні | ні | node-pty@1.1.0 |
+| Ризики | writeFile поза sandbox | fs.read довільного шляху | shell з правами хоста |
+
+Рекомендація голови: **terminal + dock-base/dock-files/dock-git (+dock-editor)** —
+повна заміна VS Code-консолі без CDN-залежності; classic-coding як альтернатива,
+якщо хочеться саме Monaco. Остаточний вибір — за користувачем (візуали:
+index.html).
+
+✅ Верифікація головою 08.09 (клони %TEMP%\review-dock): --no-verify у dock-git
+підтверджено — ЦЕ НАВМИСНИЙ захист (хук із ворожого репо не виконається при коміті
+з браузерного API; коментар у git-ops.ts), побічка — наші легітимні хуки теж
+мінятимуться (у env-репо хуків нема). fs.read dock-editor підтверджено — read
+будь-де, write тільки workspace (resolveWorkspacePath). Хеш dock-git збігається.
 
 ## npm/GitHub розвідка (голова, 08.09)
 
