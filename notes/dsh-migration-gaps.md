@@ -60,9 +60,9 @@
   ручне рев'ю головою SAFE WITH NOTES, правильні ендпоінти Kimi For Coding (`/coding/v1/usages`) і
   Codex/ChatGPT (`/backend-api/wham/usage`), бере кредешели через DSH credentials/pi-ai grant,
   не пише `~/.codex/auth.json`; верифікація dev: boot entry ✓, client.js HTTP 200 ✓, overview HTTP 200 ✓.
-  Чекає UX-тест користувача → промоція в прод
+  Промоція в prod виконана 08.09: коміт 6107cdf, safe-restart SUCCESS, prod 3080 client.js і overview HTTP 200 ✓
 
-### Трек B.5 — українізація сторонніх плагінів (dev 3081 → prod)
+### Трек B.5 — українізація сторонніх плагінів (dev 3081 → prod) — промоут у prod виконано 08.09
 - [x] `dsh-terminal` — uk словник у pnpm patch, dev bundle ✓
 - [x] `dock-files` — uk словник + detectLocale(uk), dev bundle ✓
 - [x] `dock-editor` — uk словник + detectLocale(uk), dev bundle ✓
