@@ -62,6 +62,14 @@
   не пише `~/.codex/auth.json`; верифікація dev: boot entry ✓, client.js HTTP 200 ✓, overview HTTP 200 ✓.
   Чекає UX-тест користувача → промоція в прод
 
+### Трек B.5 — українізація сторонніх плагінів (dev 3081 → prod)
+- [x] `dsh-terminal` — uk словник у pnpm patch, dev bundle ✓
+- [x] `dock-files` — uk словник + detectLocale(uk), dev bundle ✓
+- [x] `dock-editor` — uk словник + detectLocale(uk), dev bundle ✓
+- [x] `@linxin666/dsh-usage` — uk клієнтський словник + dictionary(uk), dev bundle ✓; pet-бульбашки сервера ще окремо
+- [ ] `dock-git` — великий словник (~147 рядків)
+- [ ] `dsh-classic-coding` — hardcoded lib bundle (~188 рядків), найбрудніше
+
 ### Трек C — кастомна розробка (якщо B не закриє)
 - [ ] Власний плагін за конвенцією: окремий репо в `..\repos\` + junction у `plugins/`
 
