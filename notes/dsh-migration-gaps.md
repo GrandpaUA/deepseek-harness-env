@@ -53,7 +53,9 @@
 - [x] Промоція в прод — ЗРОБЛЕНО 08.09: прод-профіль + 6 бандлів, канарка PASS, safe-restart SUCCESS (PID 26836), коміти 4d7c603/ae39c04/d052a88 запушені; верифікація: 6 рядків у dump-config, 6 client-бандлів HTTP 200 на 3080
 - [ ] (опційно, не замовлено) `dsh-file-mentions` (git-деп, allowBuilds) — клікабельні шляхи
 - [ ] (опційно, не замовлено) `dsh-edit-diff@0.2.1` — читабельні дифи карток edit/write
-- [ ] Квоти/ліміти підпискових планів — кандидат №1: `@francescoli/dsh-quota@0.2.2` (14+ провайдерів: Codex/ChatGPT, Kimi, Qwen, DeepSeek; цикли скидання, HUD, agent-tool get_quota_status). Чекає згоди на dev-цикл (рев'ю → 3081 → прод)
+- [x] Квоти/ліміти підпискових планів — `@francescoli/dsh-quota@0.2.2` на dev 3081 (08.09):
+  рев'ю SAFE WITH NOTES, баг апстріма (голе `name: dsh-quota` у cordis.patch.yml → boot падає)
+  виправлено pnpm patch. Чекає UX-тест користувача на dev → промоція в прод (з файлом патча)
 
 ### Трек C — кастомна розробка (якщо B не закриє)
 - [ ] Власний плагін за конвенцією: окремий репо в `..\repos\` + junction у `plugins/`

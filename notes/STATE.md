@@ -47,6 +47,23 @@
   dock-git/dsh-classic-coding], 6 client-бандлів HTTP 200 на 3080, git in sync з origin).
   Урок: safe-restart вимагає ПОВНІСТЮ чистий `git status --porcelain`, включно з untracked —
   `attachments/` (аплоади GUI) заблокувало перший запуск; виправлено .gitignore (d052a88)
+- **08.09: квоти/ліміти підписок — `@francescoli/dsh-quota@0.2.2` на DEV 3081**. Рев'ю жори:
+  SAFE WITH NOTES — витоків кредешелів нема (усі ключі йдуть лише в офіційні API провайдерів),
+  нуль runtime-залежностей. Примітки: (N1) `GET /api/dsh-quota/config` віддає ключі в браузер
+  без маскування — прийнятно лише за localhost-only полісі; (N2) `innerHTML` без escape для
+  `card.error` — не додавати зловмисні custom_api baseUrl; (N5) при OAuth-логіні Codex пише
+  `~/.codex/auth.json` — **логін через плагін НЕ використовувати** (власник файла — наш
+  `scripts/sync-codex-token.mjs` + планувальник); плагін сам читає його для квот (autoDetectLocal)
+- **БАГ АПСТРІМА dsh-quota (знайдено на dev, виправлено pnpm patch)**: його `cordis.patch.yml`
+  вставляє рядок `id: ui-quota-monitor, name: 'dsh-quota'` — БЕЗ scope. Зі scoped-пакета
+  голий специфікатор не резолвиться → boot падає `ERR_MODULE_NOT_FOUND` і весь інстанс мертвий.
+  Перекрити `name` власним патч-шаром профілю НЕ виходить (name не мерджиться, лише config) —
+  перевірено на живому буті. Фікс: `pnpm patch` → `patches/@francescoli__dsh-quota@0.2.2.patch`
+  (name → `@francescoli/dsh-quota`) + запис у `patchedDependencies`. **Небезпечно без патча:**
+  на npm існує ЧУЖИЙ пакет `dsh-quota@0.9.0` — голий специфікатор завантажив би його замість нашого.
+  Верифікація dev: рядок у dump-config ✓, `client.js` HTTP 200 (101 KB) ✓, boot entry ✓, dev PID 23104
+- При промоції квот у прод: скопіювати файл патча в `profiles/web/patches/` + додати запис
+  `patchedDependencies` у прод `pnpm-workspace.yaml` (разом з установкою пакета)
 - Далі: живий UX-тест у проді (F5 після рестарту); за бажанням — дрібний комфорт
   (dsh-edit-diff, dsh-balance, dsh-file-mentions) за тим самим циклом
 - Трек B підготовка (08.09): пре-рев'ю сирців трьома жорами → `notes/editor-comparison/source-review.md`.
