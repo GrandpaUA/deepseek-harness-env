@@ -6,10 +6,16 @@
     "@dsh-external/dsh-sidechain": "git+https://github.com/Buyi-wsgzg/dsh-sidechain.git",
     "@local/dsh-locale-uk": "workspace:*",
     "deepseek-harness-ultra-slash": "0.2.2",
+    "dock-base": "^0.1.2",
+    "dock-editor": "^0.2.1",
+    "dock-files": "^0.2.0",
+    "dock-git": "^0.3.2",
     "dsh-checkpoint-diff": "^0.5.2",
     "dsh-checkpoint-rewind": "^0.6.7",
+    "dsh-classic-coding": "^0.1.1",
     "dsh-recall": "^0.3.0",
     "dsh-session-fork": "^0.2.0",
+    "dsh-terminal": "^0.1.1",
     "dsh-thinking-language": "github:qingmomo233/dsh-thinking-language",
     "dshmarket": "^1.41.0"
   },
@@ -26,7 +32,13 @@
         "dsh-thinking-language",
         "dsh-checkpoint-diff",
         "dsh-checkpoint-rewind",
-        "deepseek-harness-ultra-slash"
+        "deepseek-harness-ultra-slash",
+        "dsh-terminal",
+        "dock-base",
+        "dock-files",
+        "dock-editor",
+        "dock-git",
+        "dsh-classic-coding"
       ]
     }
   }

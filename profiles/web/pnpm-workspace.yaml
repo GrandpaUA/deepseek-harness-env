@@ -6,6 +6,7 @@ nodeLinker: hoisted
 autoInstallPeers: false
 allowBuilds:
   "@dsh-external/dsh-sidechain@git+https://github.com/Buyi-wsgzg/dsh-sidechain.git#deca4cf874c38d322448b798a87aafb2ae0b3f30": true
+  "node-pty@1.1.0": true
 patchedDependencies:
   dsh-checkpoint-rewind@0.6.7: patches/dsh-checkpoint-rewind@0.6.7.patch
 minimumReleaseAgeExclude:

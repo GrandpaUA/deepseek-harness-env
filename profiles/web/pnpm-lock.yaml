@@ -25,18 +25,36 @@ importers:
       deepseek-harness-ultra-slash:
         specifier: 0.2.2
         version: 0.2.2
+      dock-base:
+        specifier: ^0.1.2
+        version: 0.1.2
+      dock-editor:
+        specifier: ^0.2.1
+        version: 0.2.1(dock-base@0.1.2)(dock-files@0.2.0(dock-base@0.1.2))
+      dock-files:
+        specifier: ^0.2.0
+        version: 0.2.0(dock-base@0.1.2)
+      dock-git:
+        specifier: ^0.3.2
+        version: 0.3.2(dock-base@0.1.2)
       dsh-checkpoint-diff:
         specifier: ^0.5.2
         version: 0.5.2
       dsh-checkpoint-rewind:
         specifier: ^0.6.7
         version: 0.6.7(patch_hash=b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9)
+      dsh-classic-coding:
+        specifier: ^0.1.1
+        version: 0.1.1
       dsh-recall:
         specifier: ^0.3.0
         version: 0.3.0
       dsh-session-fork:
         specifier: ^0.2.0
         version: 0.2.0
+      dsh-terminal:
+        specifier: ^0.1.1
+        version: 0.1.1
       dsh-thinking-language:
         specifier: github:qingmomo233/dsh-thinking-language
         version: https://codeload.github.com/qingmomo233/dsh-thinking-language/tar.gz/3c17f912aa7df1c7686e4d3f749e1cea23eea93f
@@ -69,6 +87,61 @@ packages:
       react:
         optional: true
 
+  dock-base@0.1.2:
+    resolution: {integrity: sha512-aZD5Y43hZTnriwStk2q1aiUX52aLuByY/9Lj3beCaoHqGNHfgeZdNrFDBaezNp2jtxx55U3ufNLEqVkWDAbuoQ==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      cordis: ^4.0.0-rc.7
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
+  dock-editor@0.2.1:
+    resolution: {integrity: sha512-DA/CF1OT5BSh+To+dc12k/bc/hu0IBi2Eput6UUGkZ6hXQl+ZNEM8nOx29MO6QxrkcMbGZ4sGgUd90aZ0fI+cQ==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      cordis: ^4.0.0-rc.7
+      dock-base: '>=0.1.0'
+      dock-files: '>=0.1.0'
+      react: ^18.2.0
+    peerDependenciesMeta:
+      dock-base:
+        optional: true
+      dock-files:
+        optional: true
+      react:
+        optional: true
+
+  dock-files@0.2.0:
+    resolution: {integrity: sha512-7mNxRG94mnG8CVDgsG9v1EF6+CYBFMsT4YJtg27/sTFVcPj4Ia2fd2Gwr5R358LZ0pZperLeScdPUitA5NycvA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      cordis: ^4.0.0-rc.7
+      dock-base: '>=0.1.2'
+      react: ^18.2.0
+    peerDependenciesMeta:
+      dock-base:
+        optional: true
+      react:
+        optional: true
+
+  dock-git@0.3.2:
+    resolution: {integrity: sha512-glIRndK0kyx/YsIkvi42BmSmzbJA8vJbZPTev+NmqyRPg++cCzBigJA6SlH31SKHYZu1Yok4t3MUmV/8xlKl7Q==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      cordis: ^4.0.0-rc.7
+      dock-base: '>=0.1.0'
+      react: ^18.2.0
+    peerDependenciesMeta:
+      dock-base:
+        optional: true
+      react:
+        optional: true
+
   dsh-checkpoint-diff@0.5.2:
     resolution: {integrity: sha512-SzOGRssxTdBITWuRJIEivWNWTJqtKxU4kFg5/xXyd17L5Dc4wuJR4V0TuPyevHSSACbWxIvLMxOkiYkgwDLhZg==}
     engines: {node: ^22.19.0 || >=24.0.0}
@@ -87,6 +160,9 @@ packages:
         optional: true
       '@deepseek-ai/dsh-client-ui-settings':
         optional: true
+
+  dsh-classic-coding@0.1.1:
+    resolution: {integrity: sha512-Te01zgFw4bT+s1aLZB6yCBQOEO/A0wiKn4fDmHKtnFKgKtGFlbpazw/1PElb7gzAQcn33ymLaTchVgh4nSoTww==}
 
   dsh-recall-models@0.1.0:
     resolution: {integrity: sha512-pw/YZ669MVjPpm0NRul6EaxUt0PafTwi2BgrjPeuCwTPZCGXitI2TZfp/MuHd8PcElFV35AVtS3fvV+EnIAUAg==}
@@ -121,6 +197,10 @@ packages:
       '@deepseek-ai/dsh-token-meter':
         optional: true
 
+  dsh-terminal@0.1.1:
+    resolution: {integrity: sha512-by9Lif/brkyvcaWJbZTOD9YeOU/PCXToVxm/QVzNA/xc8nQ1uYYtVDft7Necc3H3SWfkZkncJYYK/kPU+K9U6Q==}
+    engines: {node: '>=20'}
+
   dsh-thinking-language@https://codeload.github.com/qingmomo233/dsh-thinking-language/tar.gz/3c17f912aa7df1c7686e4d3f749e1cea23eea93f:
     resolution: {gitHosted: true, tarball: https://codeload.github.com/qingmomo233/dsh-thinking-language/tar.gz/3c17f912aa7df1c7686e4d3f749e1cea23eea93f}
     version: 1.0.0
@@ -142,6 +222,12 @@ packages:
     resolution: {integrity: sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==}
     hasBin: true
 
+  node-addon-api@7.1.1:
+    resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
+
+  node-pty@1.1.0:
+    resolution: {integrity: sha512-20JqtutY6JPXTUnL0ij1uad7Qe1baT46lyolh2sSENDd4sTzKZ4nmAFkeAARDKwmlLjPx6XKRlwRUxwjOy+lUg==}
+
   undici@7.29.0:
     resolution: {integrity: sha512-IDxfleLmmbSskfWSUATiN1nfn2rDuvnMOqb5CWR92iIfojA0Ud+ulOAAEQ57LPr9rWmsreUyf5lwyao+7GNNVw==}
     engines: {node: '>=20.18.1'}
@@ -161,6 +247,21 @@ snapshots:
 
   deepseek-harness-ultra-slash@0.2.2: {}
 
+  dock-base@0.1.2: {}
+
+  dock-editor@0.2.1(dock-base@0.1.2)(dock-files@0.2.0(dock-base@0.1.2)):
+    optionalDependencies:
+      dock-base: 0.1.2
+      dock-files: 0.2.0(dock-base@0.1.2)
+
+  dock-files@0.2.0(dock-base@0.1.2):
+    optionalDependencies:
+      dock-base: 0.1.2
+
+  dock-git@0.3.2(dock-base@0.1.2):
+    optionalDependencies:
+      dock-base: 0.1.2
+
   dsh-checkpoint-diff@0.5.2:
     dependencies:
       zod: 4.5.4
@@ -168,6 +269,8 @@ snapshots:
   dsh-checkpoint-rewind@0.6.7(patch_hash=b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9):
     dependencies:
       zod: 4.5.4
+
+  dsh-classic-coding@0.1.1: {}
 
   dsh-recall-models@0.1.0:
     optional: true
@@ -180,6 +283,10 @@ snapshots:
     dependencies:
       zod: 4.5.4
 
+  dsh-terminal@0.1.1:
+    dependencies:
+      node-pty: 1.1.0
+
   dsh-thinking-language@https://codeload.github.com/qingmomo233/dsh-thinking-language/tar.gz/3c17f912aa7df1c7686e4d3f749e1cea23eea93f: {}
 
   dshmarket@1.41.0:
@@ -190,6 +297,12 @@ snapshots:
   js-yaml@4.3.2:
     dependencies:
       argparse: 2.0.1
+
+  node-addon-api@7.1.1: {}
+
+  node-pty@1.1.0:
+    dependencies:
+      node-addon-api: 7.1.1
 
   undici@7.29.0: {}
 
