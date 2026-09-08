@@ -44,8 +44,10 @@
   треба allowBuilds). dock-сімейство — рев'ю триває. Обидва вердикти головою спот-перевірено.
 - Ранбук установки: `notes/track-b-runbook.md` (команди dev→прод, allowBuilds, відкат)
 - **08.09: dsh-terminal@0.1.1 встановлено на DEV 3081** (allowBuilds node-pty@1.1.0, prebuilds
-  спрацювали, node-gyp не знадобився; рестарт dev SUCCESS). Чекає тест користувача у GUI dev
-  (кнопка `>_` у хедері сесії). Після тесту — промоція в прод за ранбуком
+  спрацювали, node-gyp не знадобився; рестарт dev SUCCESS). Непряма верифікація головою:
+  рядок `terminal` у dump-config ✓, реєстрація `dsh-terminal` у __DSH_BOOT__ ✓,
+  client bundle `/plugins/dsh-terminal/client.js` HTTP 200 (866 KB) ✓. Чекає UX-тест
+  користувача у GUI dev (кнопка `>_` у хедері сесії). Після тесту — промоція в прод за ранбуком
 
 ## Нюанси
 - 2026-09-07/08: **БАГ "prepare" — ЗАКРИТИЙ (RCA доведено)**. Симптом: кожен tool call вбиває хід ("Cannot read properties of undefined (reading 'prepare')" = `ctx.tools[TOOL_RUNTIME_SCHEDULER]` undefined). Причина: **dual-URL module identity** — pnpm тягнув `@deepseek-ai/*` (dsh-tools тощо) як deps плагінів у `profiles/web/node_modules` → Node ESM вантажив ДРУГИЙ інстанс модуля за іншим URL → символи-ключі сервісів (`Symbol("@deepseek-ai/dsh-tools.scheduler")`) роз'їжджались між хостом і бандлами. **Фікс**: видалено всі `@deepseek-ai/*` з `profiles/web/node_modules` обох home; у `profiles/web/.pnpmfile.cjs` (обидва home) хук readPackage зрізає `@deepseek-ai/*` з deps/optionalDeps/peerDeps плагінів — шар НЕ відтворюється при `pnpm install`. **ПРАВИЛО: ніколи не матеріалізувати `@deepseek-ai/*` під `profiles/*/node_modules`** — сторожить .pnpmfile.cjs. Junction-шар `profiles/node_modules/@deepseek-ai/*` → runtime (створюється dsh при бооті, `healProfilesModuleFallback`) — не шкодить, headless-тести зелені з ним
