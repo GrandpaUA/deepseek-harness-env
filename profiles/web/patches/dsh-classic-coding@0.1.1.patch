@@ -1,0 +1,186 @@
+diff --git a/lib/client.js b/lib/client.js
+index 2aa686a123754a8ac68d4f8a41d498079156b691..5e035dba691c956652bc7229a56083e18d98c99e 100644
+--- a/lib/client.js
++++ b/lib/client.js
+@@ -87,7 +87,7 @@ window.__ModuleLoader__.load({
+           if (envelope.result && envelope.result.ok) return envelope.result.value
+           var errMsg = envelope.result && envelope.result.error
+             ? envelope.result.error.message
+-            : 'RPC 调用失败'
++            : 'RPC-виклик не вдався'
+           throw new Error(errMsg)
+         })
+     }
+@@ -253,7 +253,7 @@ window.__ModuleLoader__.load({
+         }
+         script.onerror = function () {
+           state.monacoLoading = false
+-          reject(new Error('Monaco Editor 加载失败'))
++          reject(new Error('Не вдалося завантажити Monaco Editor'))
+         }
+         document.head.appendChild(script)
+       })
+@@ -326,7 +326,7 @@ window.__ModuleLoader__.load({
+             key: 'loading-' + fullPath,
+             className: 'dsh-cc-tree-loading',
+             style: { paddingLeft: (paddingLeft + 20) + 'px' },
+-          }, '加载中...'))
++          }, 'Завантаження...'))
+         } else if (children) {
+           children.forEach(function (child) {
+             items.push(React.createElement(FileTreeEntry, {
+@@ -385,7 +385,7 @@ window.__ModuleLoader__.load({
+             setRootEntries(result.entries)
+             setLoading(false)
+           }).catch(function (e) {
+-            console.error('[classic-coding] 初始化失败:', e)
++            console.error('[classic-coding] Ініціалізація не вдалася:', e)
+             setError(e && e.message ? e.message : String(e))
+             setLoading(false)
+           })
+@@ -407,15 +407,15 @@ window.__ModuleLoader__.load({
+       }
+ 
+       if (!pendingSession) {
+-        return React.createElement('div', { className: 'dsh-cc-tree-loading' }, '等待会话就绪...')
++        return React.createElement('div', { className: 'dsh-cc-tree-loading' }, 'Очікую готовність сесії...')
+       }
+ 
+       if (loading) {
+-        return React.createElement('div', { className: 'dsh-cc-tree-loading' }, '加载中...')
++        return React.createElement('div', { className: 'dsh-cc-tree-loading' }, 'Завантаження...')
+       }
+ 
+       if (error) {
+-        return React.createElement('div', { className: 'dsh-cc-tree-loading' }, '文件树加载失败: ' + error)
++        return React.createElement('div', { className: 'dsh-cc-tree-loading' }, 'Не вдалося завантажити дерево файлів: ' + error)
+       }
+ 
+       return React.createElement('div', null,
+@@ -477,7 +477,7 @@ window.__ModuleLoader__.load({
+               createEditor(editorRef.current)
+             }
+           }).catch(function (e) {
+-            console.error('[classic-coding] Monaco 加载失败:', e)
++            console.error('[classic-coding] Не вдалося завантажити Monaco:', e)
+           })
+         }
+       })
+@@ -526,7 +526,7 @@ window.__ModuleLoader__.load({
+ 
+       function createEditor(container) {
+         editorInstanceRef.current = window.monaco.editor.create(container, {
+-          value: '// 欢迎使用古法编程!\n// 从左侧文件树打开文件开始编辑\n// Ctrl+S 保存文件\n',
++          value: '// Ласкаво просимо до Classic Coding!\n// Відкрий файл у дереві зліва, щоб почати редагування\n// Ctrl+S — зберегти файл\n',
+           language: 'plaintext',
+           theme: isDarkTheme() ? 'vs-dark' : 'vs',
+           fontSize: 14,
+@@ -592,7 +592,7 @@ window.__ModuleLoader__.load({
+           showFileInEditor(filePath)
+           refresh()
+         }).catch(function (e) {
+-          console.error('[classic-coding] 读取文件失败:', filePath, e)
++          console.error('[classic-coding] Не вдалося прочитати файл:', filePath, e)
+           refresh()
+         })
+       }
+@@ -607,11 +607,11 @@ window.__ModuleLoader__.load({
+ 
+         rpcCall('writeFile', { path: toAbs(filePath), content: tab.content }).then(function () {
+           tab.modified = false
+-          props.onStatusChange('\u2705 已保存: ' + filePath)
++          props.onStatusChange('\u2705 Збережено: ' + filePath)
+           refresh()
+         }).catch(function (e) {
+-          console.error('[classic-coding] 保存失败:', filePath, e)
+-          props.onStatusChange('\u274C 保存失败: ' + filePath)
++          console.error('[classic-coding] Не вдалося зберегти файл:', filePath, e)
++          props.onStatusChange('\u274C Не вдалося зберегти: ' + filePath)
+         })
+       }
+ 
+@@ -644,7 +644,7 @@ window.__ModuleLoader__.load({
+       return React.createElement('div', { className: 'dsh-cc-editor-panel' },
+         hasTabs
+           ? React.createElement('div', { ref: editorRef, className: 'dsh-cc-editor' })
+-          : React.createElement('div', { className: 'dsh-cc-editor-placeholder' }, '从左侧文件树打开文件开始编辑')
++          : React.createElement('div', { className: 'dsh-cc-editor-placeholder' }, 'Відкрий файл у дереві зліва, щоб почати редагування')
+       )
+     }
+ 
+@@ -657,7 +657,7 @@ window.__ModuleLoader__.load({
+     // ─── 主面板组件 ────────────────────────────────────────
+ 
+     function ClassicCodingPanel() {
+-      var [status, setStatus] = React.useState('就绪')
++      var [status, setStatus] = React.useState('Готово')
+       var [isOpen, setIsOpen] = React.useState(state.isOpen)
+       var [, forceUpdate] = React.useState(0)
+ 
+@@ -720,12 +720,12 @@ window.__ModuleLoader__.load({
+         React.createElement('div', { className: 'dsh-cc-panel' },
+           React.createElement('div', { className: 'dsh-cc-header' },
+             React.createElement('span', { className: 'dsh-cc-header-title' },
+-              '\u2328\uFE0F 古法编程'
++              '\u2328\uFE0F Classic Coding'
+             ),
+             React.createElement('button', {
+               className: 'dsh-cc-close',
+               onClick: handleClose,
+-              title: '关闭 Esc',
++              title: 'Закрити Esc',
+             }, '\u00D7')
+           ),
+           React.createElement(TabBar, {
+@@ -756,18 +756,18 @@ window.__ModuleLoader__.load({
+ 
+       return React.createElement('button', {
+         className: 'dsh-cc-trigger',
+-        title: '古法编程 Classic Coding',
++        title: 'Classic Coding — редактор файлів',
+         type: 'button',
+-        'aria-label': '古法编程 Classic Coding',
++        'aria-label': 'Classic Coding — редактор файлів',
+         onClick: toggle,
+       },
+         React.createElement(
+           'div',
+           { className: 'dsh-cc-trigger-head' },
+           React.createElement('span', { className: 'dsh-cc-trigger-icon', 'aria-hidden': 'true' }, '\u2328'),
+-          React.createElement('span', { className: 'dsh-cc-trigger-title' }, '古法编程')
++          React.createElement('span', { className: 'dsh-cc-trigger-title' }, 'Classic Coding')
+         ),
+-        React.createElement('div', { className: 'dsh-cc-trigger-desc' }, '打开文件编辑器')
++        React.createElement('div', { className: 'dsh-cc-trigger-desc' }, 'Відкрити редактор файлів')
+       )
+     }
+ 
+@@ -822,8 +822,8 @@ window.__ModuleLoader__.load({
+         }
+         var span = document.createElement('span')
+         span.className = 'dsh-cc-open-here'
+-        span.textContent = '古法编程'
+-        span.title = '在古法编程中打开'
++        span.textContent = 'Classic Coding'
++        span.title = 'Відкрити в Classic Coding'
+         span.dataset.path = path
+         btn.appendChild(document.createTextNode('\u00A0'))
+         btn.appendChild(span)
+@@ -844,7 +844,7 @@ window.__ModuleLoader__.load({
+       function tryOpen() {
+         if (!state.root || !state._openFile) {
+           if (attempts++ < 40) { setTimeout(tryOpen, 250); return }
+-          console.error('[classic-coding] 文件树根未就绪，无法在插件内打开:', rawPath)
++          console.error('[classic-coding] Корінь дерева файлів не готовий, не можу відкрити в плагіні:', rawPath)
+           return
+         }
+         if (state._openFile) state._openFile(rawPath)
+@@ -910,7 +910,7 @@ window.__ModuleLoader__.load({
+         var slots = ctx.get('slots')
+         if (!slots) return
+         var sessionsService = ctx.get('sessions')
+-        if (!sessionsService) throw new Error('[classic-coding] 缺少 sessions 服务，请确认 dsh-client-runtime 已加载')
++        if (!sessionsService) throw new Error('[classic-coding] Немає сервісу sessions, перевір dsh-client-runtime')
+         sessions = sessionsService
+ 
+         // 注入样式 + 消息流尾巴，effect 管理生命周期

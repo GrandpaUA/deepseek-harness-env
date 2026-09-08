@@ -1,0 +1,73 @@
+diff --git a/lib/client.js b/lib/client.js
+index 8a6d607c41582623041dd6483b30d4a97a092fe6..7668b784a3df0227a5ab8d0bb0ce45eb520bd626 100644
+--- a/lib/client.js
++++ b/lib/client.js
+@@ -142,13 +142,57 @@ window.__ModuleLoader__.load({
+ 			"usage.config.bubbleMode.change": "On change",
+ 			"usage.config.bubbleMode.off": "Off"
+ 		};
++		const uk = {
++			"usage.title": "Статистика використання",
++			"usage.tab.usage": "Використання",
++			"usage.tab.plans": "Підписки",
++			"usage.refresh": "Оновити",
++			"usage.refreshing": "Оновлюю…",
++			"usage.updated": "Оновлено {time}",
++			"usage.loading": "Завантажую статистику…",
++			"usage.error": "Не вдалося завантажити: {error}",
++			"usage.current": "Поточний",
++			"usage.today": "Сьогодні",
++			"usage.today.cost": "Витрати сьогодні (оцінка)",
++			"usage.peak.on": "Піковий час DeepSeek: тариф ×2, завершиться {time}",
++			"usage.peak.off": "Непіковий час DeepSeek: половина пікового тарифу, пік повернеться {time}",
++			"usage.calls": "викликів: {n}",
++			"usage.tokens.total": "Усього tokens",
++			"usage.tokens.input": "Вхід",
++			"usage.tokens.output": "Вихід",
++			"usage.tokens.cacheRead": "Читання кешу",
++			"usage.tokens.cacheWrite": "Запис кешу",
++			"usage.trend": "Останні 30 днів",
++			"usage.noData": "Даних ще немає (облік починається після ввімкнення плагіна)",
++			"usage.balance": "Баланс",
++			"usage.balance.unsupported": "Запит балансу не підтримується",
++			"usage.balance.noCredential": "Кредешел не налаштовано",
++			"usage.oauth": "OAuth-кредешел, баланс не запитується",
++			"usage.plan.reset": "скидання {date}",
++			"usage.plan.noPlan": "Дані підписки не знайдено",
++			"usage.plan.noneConfigured": "Немає налаштованих provider з підписками (наприклад Kimi, GLM, OpenCode Go, MiniMax, Codex)",
++			"usage.plan.windows.5h": "5 годин",
++			"usage.plan.windows.week": "Щотижня",
++			"usage.plan.windows.month": "Щомісяця",
++			"usage.provider.error": "Запит не вдався: {error}",
++			"usage.errorListSeparator": "; ",
++			"usage.config.title": "Налаштування",
++			"usage.config.enabled": "Увімкнути плагін",
++			"usage.config.pollIntervalSec": "Інтервал опитування (сек)",
++			"usage.config.bubbleMode": "Бульбашка pet",
++			"usage.config.bubbleMode.always": "Показувати постійно",
++			"usage.config.bubbleMode.change": "Лише при зміні",
++			"usage.config.bubbleMode.off": "Вимкнено"
++		};
+ 		/**
+ 		* Active dictionary, picked by the document language at call time. The
+ 		* section resolves its copy the same tiny way the pet's DOM-injected surface
+ 		* does (the settings section has no framework locale seat of its own).
+ 		*/
+ 		function dictionary() {
+-			return (typeof document !== "undefined" ? document.documentElement.lang : "zh").toLowerCase().startsWith("en") ? en : zh;
++			const lang = (typeof document !== "undefined" ? document.documentElement.lang : "zh").toLowerCase();
++			if (lang.startsWith("uk")) return uk;
++			return lang.startsWith("en") ? en : zh;
+ 		}
+ 		/** Translate a key with optional `{name}` template params; missing keys degrade to the key. */
+ 		function t(key, params) {
+@@ -1296,7 +1340,8 @@ window.__ModuleLoader__.load({
+ 				try {
+ 					return ctx.locale.register(NS, {
+ 						zh,
+-						en
++						en,
++						uk
+ 					});
+ 				} catch {
+ 					return () => {};

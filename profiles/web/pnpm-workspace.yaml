@@ -8,6 +8,12 @@ allowBuilds:
   "@dsh-external/dsh-sidechain@git+https://github.com/Buyi-wsgzg/dsh-sidechain.git#deca4cf874c38d322448b798a87aafb2ae0b3f30": true
   "node-pty@1.1.0": true
 patchedDependencies:
+  '@linxin666/dsh-usage@0.3.17': patches/@linxin666__dsh-usage@0.3.17.patch
+  dock-editor@0.2.1: patches/dock-editor@0.2.1.patch
+  dock-files@0.2.0: patches/dock-files@0.2.0.patch
+  dock-git@0.3.2: patches/dock-git@0.3.2.patch
   dsh-checkpoint-rewind@0.6.7: patches/dsh-checkpoint-rewind@0.6.7.patch
+  dsh-classic-coding@0.1.1: patches/dsh-classic-coding@0.1.1.patch
+  dsh-terminal@0.1.1: patches/dsh-terminal@0.1.1.patch
 minimumReleaseAgeExclude:
   - dsh-checkpoint-rewind@0.6.7

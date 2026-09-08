@@ -1,0 +1,64 @@
+diff --git a/lib/client.js b/lib/client.js
+index 77565b2368ca2ffc8d9265f4349d6f60a588d91a..73c783d6f33273e2f9651f1845e6a20b10acf338 100644
+--- a/lib/client.js
++++ b/lib/client.js
+@@ -309,12 +309,58 @@ window.__ModuleLoader__.load({
+ 				"transferStatus.failed": "Failed",
+ 				"transferStatus.cancelled": "Cancelled",
+ 				"transferStatus.skipped": "Skipped"
++			},
++			uk: {
++				refresh: "Оновити",
++				collapseAll: "Згорнути все",
++				emptyDir: "Порожній каталог",
++				noSession: "Немає сесії",
++				loading: "Завантаження…",
++				open: "Відкрити",
++				newFile: "Новий файл",
++				newFolder: "Нова папка",
++				rename: "Перейменувати",
++				copy: "Копіювати",
++				cut: "Вирізати",
++				paste: "Вставити",
++				pasteWithName: "Вставити {name}",
++				pasteImage: "Вставити зображення",
++				delete: "Видалити",
++				copyPath: "Копіювати шлях",
++				ok: "OK",
++				cancel: "Скасувати",
++				confirmDelete: "Видалити \"{name}\"? Цю дію не можна скасувати.",
++				clipboardNoImage: "У буфері обміну немає зображення",
++				clipboardUnsupported: "Браузер не підтримує читання зображень із буфера обміну",
++				uploadBusy: "Зачекай завершення попереднього завантаження",
++				newFileBase: "Новий файл.txt",
++				newFolderBase: "Нова папка",
++				fileFallbackName: "Файл",
++				transferCenter: "Центр передавання",
++				transferSummary: "активних: {active} · {progress}%",
++				clearCompleted: "Очистити завершені",
++				noTransfers: "Передавань немає",
++				upload: "Завантажити",
++				download: "Завантажити собі",
++				browserDownload: "Завантаження браузером",
++				downloadFailed: "Не вдалося завантажити",
++				symlinkSkipped: "Символічне посилання пропущено",
++				pause: "Пауза",
++				resume: "Продовжити",
++				openTransferCenter: "Відкрити центр передавання",
++				"transferStatus.queued": "У черзі",
++				"transferStatus.running": "Виконується",
++				"transferStatus.paused": "На паузі",
++				"transferStatus.completed": "Завершено",
++				"transferStatus.failed": "Помилка",
++				"transferStatus.cancelled": "Скасовано",
++				"transferStatus.skipped": "Пропущено"
+ 			}
+ 		};
+ 		/** Resolve the active DSH locale from the locale service, then the browser. */
+ 		function detectLocale(ctx) {
+ 			const active = (ctx?.get?.("locale"))?.getSnapshot?.()?.active;
+-			if (active === "zh" || active === "en") return active;
++			if (active === "zh" || active === "en" || active === "uk") return active;
+ 			if (typeof navigator !== "undefined" && typeof navigator.language === "string" && navigator.language.toLowerCase().startsWith("zh")) return "zh";
+ 			return "en";
+ 		}

@@ -4,6 +4,7 @@
   "dependencies": {
     "@dennisrongo/dsh-memory": "^0.1.2",
     "@dsh-external/dsh-sidechain": "git+https://github.com/Buyi-wsgzg/dsh-sidechain.git",
+    "@linxin666/dsh-usage": "^0.3.17",
     "@local/dsh-locale-uk": "workspace:*",
     "deepseek-harness-ultra-slash": "0.2.2",
     "dock-base": "^0.1.2",
@@ -38,7 +39,8 @@
         "dock-files",
         "dock-editor",
         "dock-git",
-        "dsh-classic-coding"
+        "dsh-classic-coding",
+        "@linxin666/dsh-usage"
       ]
     }
   }

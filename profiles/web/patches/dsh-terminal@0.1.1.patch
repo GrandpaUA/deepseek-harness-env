@@ -1,0 +1,42 @@
+diff --git a/lib/client.js b/lib/client.js
+index ddebb03e6132b1bdf6b9a72da6d367f65d9fe2d8..6d02a80ee6889e04ebecde9f320be6d77d0a7560 100644
+--- a/lib/client.js
++++ b/lib/client.js
+@@ -14428,6 +14428,27 @@ window.__ModuleLoader__.load({
+ 			"state.empty": "No sessions — click + to create one",
+ 			"state.exited": "Process exited (code {code})"
+ 		};
++		const uk = {
++			"panel.title": "Термінал",
++			"tab.new": "Новий термінал",
++			"tab.close": "Закрити термінал",
++			"action.clear": "Очистити",
++			"action.copy": "Копіювати виділене",
++			"action.paste": "Вставити",
++			"action.shell": "Shell",
++			"action.cwd": "Каталог",
++			"action.float": "Плаваюча панель",
++			"action.dock": "Пристикувати",
++			"action.minimize": "Згорнути",
++			"action.maximize": "Розгорнути",
++			"action.restore": "Відновити",
++			"action.close": "Закрити",
++			"action.resizeHint": "Потягни верхній край, щоб змінити висоту",
++			"state.opening": "Запускаю…",
++			"state.error": "Помилка термінала: {message}",
++			"state.empty": "Немає сесій — натисни +, щоб створити термінал",
++			"state.exited": "Процес завершився (код {code})"
++		};
+ 		//#endregion
+ 		//#region node_modules/zod/v4/core/core.js
+ 		var _a$1;
+@@ -18850,7 +18871,8 @@ window.__ModuleLoader__.load({
+ 			const api = createTermApi(ctx);
+ 			ctx.effect(() => ctx.locale.register(NS, {
+ 				zh,
+-				en
++				en,
++				uk
+ 			}), "terminal: dictionaries");
+ 			ctx.slots.inject("conversation.session.header.actions", () => ctx.slots.register({
+ 				name: "conversation.session.header.actions",

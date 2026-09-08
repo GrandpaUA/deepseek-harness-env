@@ -7,7 +7,13 @@ settings:
 pnpmfileChecksum: sha256-bIUIZa4r98iuDgNd+0u6VBNpfHG4JVRj+fp9HaplflU=
 
 patchedDependencies:
+  '@linxin666/dsh-usage@0.3.17': 7bf7d376bdbc765377913e8e0de40dcac3c04853a5f0fd31c0bd6d395ce999f4
+  dock-editor@0.2.1: e9aa0f3a19231c5c3224048f60c6eb562494cde447830d5d3225330a7e884853
+  dock-files@0.2.0: 80ac9cf3456bcdcd73b39b9829c56c4721d21aa6ab351ba61d16f187c153cd9b
+  dock-git@0.3.2: 0c3a30b80168748c71fec43a37620d4df55027e19919675584c3573465b7842c
   dsh-checkpoint-rewind@0.6.7: b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9
+  dsh-classic-coding@0.1.1: 8c0debe3fe78cf2f209c64b2543eea28892cd900d09f1cff3b4c3cbf87a13300
+  dsh-terminal@0.1.1: d09069f468b17be5049fc800ada9f4990d8f87d0a99b8c4d1d9dfa864f826e48
 
 importers:
 
@@ -19,6 +25,9 @@ importers:
       '@dsh-external/dsh-sidechain':
         specifier: git+https://github.com/Buyi-wsgzg/dsh-sidechain.git
         version: git+https://github.com/Buyi-wsgzg/dsh-sidechain.git#deca4cf874c38d322448b798a87aafb2ae0b3f30
+      '@linxin666/dsh-usage':
+        specifier: ^0.3.17
+        version: 0.3.17(patch_hash=7bf7d376bdbc765377913e8e0de40dcac3c04853a5f0fd31c0bd6d395ce999f4)
       '@local/dsh-locale-uk':
         specifier: workspace:*
         version: link:../../plugins/dsh-locale-uk
@@ -30,13 +39,13 @@ importers:
         version: 0.1.2
       dock-editor:
         specifier: ^0.2.1
-        version: 0.2.1(dock-base@0.1.2)(dock-files@0.2.0(dock-base@0.1.2))
+        version: 0.2.1(patch_hash=e9aa0f3a19231c5c3224048f60c6eb562494cde447830d5d3225330a7e884853)(dock-base@0.1.2)(dock-files@0.2.0(patch_hash=80ac9cf3456bcdcd73b39b9829c56c4721d21aa6ab351ba61d16f187c153cd9b)(dock-base@0.1.2))
       dock-files:
         specifier: ^0.2.0
-        version: 0.2.0(dock-base@0.1.2)
+        version: 0.2.0(patch_hash=80ac9cf3456bcdcd73b39b9829c56c4721d21aa6ab351ba61d16f187c153cd9b)(dock-base@0.1.2)
       dock-git:
         specifier: ^0.3.2
-        version: 0.3.2(dock-base@0.1.2)
+        version: 0.3.2(patch_hash=0c3a30b80168748c71fec43a37620d4df55027e19919675584c3573465b7842c)(dock-base@0.1.2)
       dsh-checkpoint-diff:
         specifier: ^0.5.2
         version: 0.5.2
@@ -45,7 +54,7 @@ importers:
         version: 0.6.7(patch_hash=b450553be88b3a6098e9400a22ad3941f28aded442cd3274facaed5b1b44f7f9)
       dsh-classic-coding:
         specifier: ^0.1.1
-        version: 0.1.1
+        version: 0.1.1(patch_hash=8c0debe3fe78cf2f209c64b2543eea28892cd900d09f1cff3b4c3cbf87a13300)
       dsh-recall:
         specifier: ^0.3.0
         version: 0.3.0
@@ -54,15 +63,13 @@ importers:
         version: 0.2.0
       dsh-terminal:
         specifier: ^0.1.1
-        version: 0.1.1
+        version: 0.1.1(patch_hash=d09069f468b17be5049fc800ada9f4990d8f87d0a99b8c4d1d9dfa864f826e48)
       dsh-thinking-language:
         specifier: github:qingmomo233/dsh-thinking-language
         version: https://codeload.github.com/qingmomo233/dsh-thinking-language/tar.gz/3c17f912aa7df1c7686e4d3f749e1cea23eea93f
       dshmarket:
         specifier: ^1.41.0
         version: 1.41.0
-
-  ../../plugins/dsh-locale-uk: {}
 
 packages:
 
@@ -75,8 +82,20 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
+  '@linxin666/dsh-usage@0.3.17':
+    resolution: {integrity: sha512-R+fdB2q06GP6MXXwuxENFK84jgG8GRK6ggm21g5lgy459JfJd4yPJukWtCg5ITN7ifN9t+ouia1268nrDzmBVw==}
+    engines: {node: ^22.19.0 || >=24.0.0}
+    peerDependencies:
+      react: ^18.2.0
+
+  '@standard-schema/spec@1.1.0':
+    resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+
+  cosmokit@1.8.1:
+    resolution: {integrity: sha512-PDBv4l90xZKrUsZ0vtoycgZpO/j4iFsqJXrAxsyBDsnQRI7ZMJXIjgDJsKNjd5L8jnVnnlrDCdhkFbTncgCVjQ==}
 
   deepseek-harness-ultra-slash@0.2.2:
     resolution: {integrity: sha512-51HER0C7qeZ2IvulHNkQPkWK9HWqcexqDZyvqBs3DzbmOx976t3ZfN6wxOxX+3BmGXuo5RYEENk0scGNR07aqw==}
@@ -228,6 +247,9 @@ packages:
   node-pty@1.1.0:
     resolution: {integrity: sha512-20JqtutY6JPXTUnL0ij1uad7Qe1baT46lyolh2sSENDd4sTzKZ4nmAFkeAARDKwmlLjPx6XKRlwRUxwjOy+lUg==}
 
+  schemastery@3.18.0:
+    resolution: {integrity: sha512-Jw2uxjoyyqc/yeurmChUEc/jbi8GsrdXV/KmqRUDZXJAXAmrJiPsz8vKa17l/VckyzljHZ9oGaul443CQiXxtA==}
+
   undici@7.29.0:
     resolution: {integrity: sha512-IDxfleLmmbSskfWSUATiN1nfn2rDuvnMOqb5CWR92iIfojA0Ud+ulOAAEQ57LPr9rWmsreUyf5lwyao+7GNNVw==}
     engines: {node: '>=20.18.1'}
@@ -243,22 +265,30 @@ snapshots:
 
   '@dsh-external/dsh-sidechain@git+https://github.com/Buyi-wsgzg/dsh-sidechain.git#deca4cf874c38d322448b798a87aafb2ae0b3f30': {}
 
+  '@linxin666/dsh-usage@0.3.17(patch_hash=7bf7d376bdbc765377913e8e0de40dcac3c04853a5f0fd31c0bd6d395ce999f4)':
+    dependencies:
+      schemastery: 3.18.0
+
+  '@standard-schema/spec@1.1.0': {}
+
   argparse@2.0.1: {}
+
+  cosmokit@1.8.1: {}
 
   deepseek-harness-ultra-slash@0.2.2: {}
 
   dock-base@0.1.2: {}
 
-  dock-editor@0.2.1(dock-base@0.1.2)(dock-files@0.2.0(dock-base@0.1.2)):
+  dock-editor@0.2.1(patch_hash=e9aa0f3a19231c5c3224048f60c6eb562494cde447830d5d3225330a7e884853)(dock-base@0.1.2)(dock-files@0.2.0(patch_hash=80ac9cf3456bcdcd73b39b9829c56c4721d21aa6ab351ba61d16f187c153cd9b)(dock-base@0.1.2)):
     optionalDependencies:
       dock-base: 0.1.2
-      dock-files: 0.2.0(dock-base@0.1.2)
+      dock-files: 0.2.0(patch_hash=80ac9cf3456bcdcd73b39b9829c56c4721d21aa6ab351ba61d16f187c153cd9b)(dock-base@0.1.2)
 
-  dock-files@0.2.0(dock-base@0.1.2):
+  dock-files@0.2.0(patch_hash=80ac9cf3456bcdcd73b39b9829c56c4721d21aa6ab351ba61d16f187c153cd9b)(dock-base@0.1.2):
     optionalDependencies:
       dock-base: 0.1.2
 
-  dock-git@0.3.2(dock-base@0.1.2):
+  dock-git@0.3.2(patch_hash=0c3a30b80168748c71fec43a37620d4df55027e19919675584c3573465b7842c)(dock-base@0.1.2):
     optionalDependencies:
       dock-base: 0.1.2
 
@@ -270,7 +300,7 @@ snapshots:
     dependencies:
       zod: 4.5.4
 
-  dsh-classic-coding@0.1.1: {}
+  dsh-classic-coding@0.1.1(patch_hash=8c0debe3fe78cf2f209c64b2543eea28892cd900d09f1cff3b4c3cbf87a13300): {}
 
   dsh-recall-models@0.1.0:
     optional: true
@@ -283,7 +313,7 @@ snapshots:
     dependencies:
       zod: 4.5.4
 
-  dsh-terminal@0.1.1:
+  dsh-terminal@0.1.1(patch_hash=d09069f468b17be5049fc800ada9f4990d8f87d0a99b8c4d1d9dfa864f826e48):
     dependencies:
       node-pty: 1.1.0
 
@@ -303,6 +333,11 @@ snapshots:
   node-pty@1.1.0:
     dependencies:
       node-addon-api: 7.1.1
+
+  schemastery@3.18.0:
+    dependencies:
+      '@standard-schema/spec': 1.1.0
+      cosmokit: 1.8.1
 
   undici@7.29.0: {}
 

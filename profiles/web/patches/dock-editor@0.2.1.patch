@@ -1,0 +1,43 @@
+diff --git a/lib/client.js b/lib/client.js
+index d28d7223e311e690053b3e2c5772a2e8045ebd7a..e4e71812a6e68859f61754b563744fdf2b49b128 100644
+--- a/lib/client.js
++++ b/lib/client.js
+@@ -54,6 +54,29 @@ window.__ModuleLoader__.load({
+ 				searchReplaceAll: "Replace All",
+ 				searchClose: "Close",
+ 				searchNoMatch: "No matches"
++			},
++			uk: {
++				unsavedCloseConfirm: "Є незбережені зміни. Закрити все одно?",
++				ok: "OK",
++				cancel: "Скасувати",
++				save: "Зберегти",
++				saveDirty: "Зберегти ●",
++				saving: "Збереження…",
++				savedAt: "Збережено {time}",
++				readOnly: "Лише читання (поза workspace)",
++				wrap: "Перенос",
++				wrapTooltipOn: "Перенос рядків увімкнено. Натисни, щоб вимкнути",
++				wrapTooltipOff: "Перенос рядків вимкнено. Натисни, щоб увімкнути",
++				saveTooLarge: "Файл перевищує ліміт редагування 256 KiB; збереження вимкнено, щоб не обрізати оригінал.",
++				truncatedNotice: "Файл перевищує 256 KiB; показано лише перші 256 KiB, збереження вимкнено, щоб не обрізати оригінал.",
++				searchFind: "Знайти",
++				searchReplace: "Замінити",
++				searchPrev: "Попередній збіг",
++				searchNext: "Наступний збіг",
++				searchReplaceOne: "Замінити",
++				searchReplaceAll: "Замінити все",
++				searchClose: "Закрити",
++				searchNoMatch: "Збігів немає"
+ 			}
+ 		};
+ 		/**
+@@ -73,7 +96,7 @@ window.__ModuleLoader__.load({
+ 		*/
+ 		function detectLocale(ctx) {
+ 			const active = (ctx?.get?.("locale"))?.getSnapshot?.()?.active;
+-			if (active === "zh" || active === "en") return active;
++			if (active === "zh" || active === "en" || active === "uk") return active;
+ 			if (typeof navigator !== "undefined" && typeof navigator.language === "string" && navigator.language.toLowerCase().startsWith("zh")) return "zh";
+ 			return "en";
+ 		}
