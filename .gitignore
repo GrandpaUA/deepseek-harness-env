@@ -13,6 +13,7 @@ sessions/
 storages/
 .credentials.yaml
 settings.yaml
+attachments/
 
 # Junk
 *.log
