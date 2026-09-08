@@ -53,10 +53,14 @@
 - [x] Промоція в прод — ЗРОБЛЕНО 08.09: прод-профіль + 6 бандлів, канарка PASS, safe-restart SUCCESS (PID 26836), коміти 4d7c603/ae39c04/d052a88 запушені; верифікація: 6 рядків у dump-config, 6 client-бандлів HTTP 200 на 3080
 - [ ] (опційно, не замовлено) `dsh-file-mentions` (git-деп, allowBuilds) — клікабельні шляхи
 - [ ] (опційно, не замовлено) `dsh-edit-diff@0.2.1` — читабельні дифи карток edit/write
-- [x] Квоти/ліміти підпискових планів — `@francescoli/dsh-quota@0.2.2` на dev 3081 (08.09):
-  рев'ю SAFE WITH NOTES, баг апстріма ДВОГОЛОВИЙ (голе `dsh-quota` у `cordis.patch.yml` → boot
-  падає; голий `id` у `lib/client.js` → бандл не реєструється в GUI) виправлено одним pnpm patch.
-  Чекає UX-тест користувача на dev → промоція в прод (з файлом патча)
+- [x] Квоти/ліміти підпискових планів — `@francescoli/dsh-quota@0.2.2` протестовано і ЗНЯТО з dev:
+  Codex-кружечок працював, але Kimi/Qwen не ті ендпоінти (Kimi=Moonshot balance, Qwen=models ping),
+  плюс двоголовий баг scoped-імені; не кандидат у прод
+- [x] Квоти/ліміти — `@linxin666/dsh-usage@0.3.17` встановлено на dev 3081 (08.09):
+  ручне рев'ю головою SAFE WITH NOTES, правильні ендпоінти Kimi For Coding (`/coding/v1/usages`) і
+  Codex/ChatGPT (`/backend-api/wham/usage`), бере кредешели через DSH credentials/pi-ai grant,
+  не пише `~/.codex/auth.json`; верифікація dev: boot entry ✓, client.js HTTP 200 ✓, overview HTTP 200 ✓.
+  Чекає UX-тест користувача → промоція в прод
 
 ### Трек C — кастомна розробка (якщо B не закриє)
 - [ ] Власний плагін за конвенцією: окремий репо в `..\repos\` + junction у `plugins/`

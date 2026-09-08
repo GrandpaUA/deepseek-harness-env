@@ -66,9 +66,8 @@
   Фікс ОДНИМ патчем: `patches/@francescoli__dsh-quota@0.2.2.patch` (name → `@francescoli/dsh-quota`
   в обох файлах) + запис у `patchedDependencies`. **Небезпечно без патча:** на npm існує ЧУЖИЙ
   пакет `dsh-quota@0.9.0` — голий специфікатор завантажив би його замість нашого.
-  Верифікація dev: рядок у dump-config ✓, серверний бут ✓, `client.js` HTTP 200 з `id: "@francescoli/dsh-quota"` ✓ (dev PID 13204)
-- При промоції квот у прод: скопіювати файл патча в `profiles/web/patches/` + додати запис
-  `patchedDependencies` у прод `pnpm-workspace.yaml` (разом з установкою пакета)
+  Верифікація dev: рядок у dump-config ✓, серверний бут ✓, `client.js` HTTP 200 з `id: "@francescoli/dsh-quota"` ✓ (dev PID 13204). Після UX-тесту: Codex-кружечок працює, решта червоне; RCA: Kimi/Qwen не ті ендпоінти (Kimi=Moonshot balance, Qwen=models ping) і ключі не з DSH credentials. **ЗНЯТО з dev, не кандидат у прод**
+- **08.09: `@linxin666/dsh-usage@0.3.17` поставлено на DEV 3081 замість francescoli**. Ручне рев'ю головою: SAFE WITH NOTES. Плюси: Kimi For Coding endpoint `https://api.kimi.com/coding/v1/usages` (5h/week reset windows), Codex/ChatGPT endpoint `https://chatgpt.com/backend-api/wham/usage`, кредешели через DSH credentials/pi-ai grant, `~/.codex/auth.json` не пише; overview loopback-only і не серіалізує ключі. Qwen token plan програмного endpoint нема — жоден плагін не покаже факти, лише «без даних». Верифікація dev: dump-config `id: usage name: '@linxin666/dsh-usage'` ✓, dev restart SUCCESS (PID 31644), boot entry ✓, client.js HTTP 200 (60 KB, `id: "@linxin666/dsh-usage"`) ✓, `/api/dsh-usage/overview` HTTP 200 ✓. Чекає UX-тест користувача → промоція в прод
 - Далі: живий UX-тест у проді (F5 після рестарту); за бажанням — дрібний комфорт
   (dsh-edit-diff, dsh-balance, dsh-file-mentions) за тим самим циклом
 - Трек B підготовка (08.09): пре-рев'ю сирців трьома жорами → `notes/editor-comparison/source-review.md`.
@@ -102,6 +101,7 @@
 - 2026-09-07: **Провайдери-«примари» в GUI**: рядки "DeepSeek" і "DashScope (Qwen)" без кнопки видалення — це НЕ дані, а роути вбудованого плагіна `@deepseek-ai/dsh-llm-deepseek` (registerConfigurableProviders, lib/index.js:947/952; ns `llm-deepseek`/`llm-dashscope`). Вимкнено обидва через `profiles/web/cordis.patch.yml` запис `- id: llm-deepseek / disabled: true` (потрібен рестарт інстанса). Повернути = прибрати запис + рестарт
 - 2026-09-07: qwen-token-plan (каталожний pi-ai роут, моделі qwen3.6…qwen3.8) ЗАЛИШАЄТЬСЯ в settings.yaml — це нормальний провайдер, видаляється з GUI. Його apiKeyEnv QWEN_TOKEN_PLAN_API_KEY — ключ задається через Models-сторінку
 - 2026-09-07: ChatGPT Plus ($20) в DSH через openai-codex: OAuth-токен з Codex CLI (`~/.codex/auth.json`, логін уже є) → кредешел CODEX_CHATGPT_TOKEN. `scripts/sync-codex-token.mjs` — синк + авто-рефреш (access_token живе ~10 днів; DSH сам НЕ рефрешить); **повішено на планувальник Windows: таск «DSH Codex Token Sync», щодня 09:47**, реєстратор `scripts/register-codex-sync.ps1`, лог `notes/codex-token-sync.log`. settings: блок openai-codex скорочено до apiKeyEnv — каталог pi-ai дає всі 7 моделей (gpt-5.3-codex-spark…gpt-5.6-terra)
+- 2026-09-08: **жори/сабагенти в ЦІЙ старій сесії падають через Kimi weekly limit**. Доказ: trivial subagent → request/header `provider: kimi-coding, model: k3-256k`, 403 `You've reached your weekly (7-day) usage limit`; при цьому `settings.yaml` уже має `agent-default-model: qwen-token-plan/qwen3.8-max`, а сама сесія пізніше ходить qwen. Висновок: сабагенти успадковують стару модель сесії (kimi), не поточний GUI override. Workaround: workflow з явним `provider/model` override на qwen (користувач схвалив) або нова сесія
 - grep/glob інструменти зламані → пошук через pwsh `Select-String`
 - web_search без API-ключа → пошук через Invoke-RestMethod (GitHub API, npm registry)
 - /compact не викликається агентом; стиснення = авто-чекпоінти харнесу + цей файл
