@@ -42,7 +42,11 @@
   UX-тест користувача на dev пройдено (термінал, дерево файлів, git-граф — працюють).
   Вердикт по редакторах: лишаємо ОБИДВА (dock ліворуч у барі, classic-coding плаваючий
   праворуч), остаточний вибір пізніше за живим використанням. Канарка PASS, safe-restart
-  через WMI. node-pty win32-x64 prebuilds на місці
+  через WMI. node-pty win32-x64 prebuilds на місці. **Результат: SUCCESS** (новий PID 26836;
+  верифіковано: 6 рядків композиції у dump-config [terminal/dock/dock-files/dock-editor/
+  dock-git/dsh-classic-coding], 6 client-бандлів HTTP 200 на 3080, git in sync з origin).
+  Урок: safe-restart вимагає ПОВНІСТЮ чистий `git status --porcelain`, включно з untracked —
+  `attachments/` (аплоади GUI) заблокувало перший запуск; виправлено .gitignore (d052a88)
 - Далі: живий UX-тест у проді (F5 після рестарту); за бажанням — дрібний комфорт
   (dsh-edit-diff, dsh-balance, dsh-file-mentions) за тим самим циклом
 - Трек B підготовка (08.09): пре-рев'ю сирців трьома жорами → `notes/editor-comparison/source-review.md`.
