@@ -48,6 +48,10 @@
   рядок `terminal` у dump-config ✓, реєстрація `dsh-terminal` у __DSH_BOOT__ ✓,
   client bundle `/plugins/dsh-terminal/client.js` HTTP 200 (866 KB) ✓. Чекає UX-тест
   користувача у GUI dev (кнопка `>_` у хедері сесії). Після тесту — промоція в прод за ранбуком
+- **08.09: на DEV 3081 додатково встановлено dock-base+dock-files+dock-editor+dock-git +
+  dsh-classic-coding** (усі з npm, без allowBuilds — нативних збірок нема). Рестарт dev SUCCESS,
+  усі 6 нових client-бандлів у __DSH_BOOT__ ✓. Мета: користувач обирає редактора НАЖИВО на dev
+  (обидва варіанти паралельно), переможець іде в прод, аутсайдер — `dsh plugin remove`
 
 ## Нюанси
 - 2026-09-07/08: **БАГ "prepare" — ЗАКРИТИЙ (RCA доведено)**. Симптом: кожен tool call вбиває хід ("Cannot read properties of undefined (reading 'prepare')" = `ctx.tools[TOOL_RUNTIME_SCHEDULER]` undefined). Причина: **dual-URL module identity** — pnpm тягнув `@deepseek-ai/*` (dsh-tools тощо) як deps плагінів у `profiles/web/node_modules` → Node ESM вантажив ДРУГИЙ інстанс модуля за іншим URL → символи-ключі сервісів (`Symbol("@deepseek-ai/dsh-tools.scheduler")`) роз'їжджались між хостом і бандлами. **Фікс**: видалено всі `@deepseek-ai/*` з `profiles/web/node_modules` обох home; у `profiles/web/.pnpmfile.cjs` (обидва home) хук readPackage зрізає `@deepseek-ai/*` з deps/optionalDeps/peerDeps плагінів — шар НЕ відтворюється при `pnpm install`. **ПРАВИЛО: ніколи не матеріалізувати `@deepseek-ai/*` під `profiles/*/node_modules`** — сторожить .pnpmfile.cjs. Junction-шар `profiles/node_modules/@deepseek-ai/*` → runtime (створюється dsh при бооті, `healProfilesModuleFallback`) — не шкодить, headless-тести зелені з ним
